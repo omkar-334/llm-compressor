@@ -108,8 +108,6 @@ class LifecycleCallbacks:
         :param kwargs: additional kwargs to pass to the current session's event method
         :return: the modified state of the active session after invoking the event
         """
-        # log loss if loss calculated
-        active_session()._log_loss(event_type=EventType.LOSS_CALCULATED, loss=loss)
         return cls.event(EventType.LOSS_CALCULATED, loss=loss, **kwargs)
 
     @classmethod
@@ -140,7 +138,6 @@ class LifecycleCallbacks:
         :param kwargs: additional kwargs to pass to the current session's event method
         :return: the modified state of the active session after invoking the event
         """
-        active_session()._log_model_info()
         return cls.event(EventType.BATCH_END, **kwargs)
 
     @classmethod
