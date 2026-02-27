@@ -5,7 +5,7 @@ from transformers import AutoModelForCausalLM
 
 from llmcompressor import oneshot
 from llmcompressor.core.session_functions import reset_session
-from llmcompressor.modifiers.quantization.gptq import GPTQModifier
+from llmcompressor.modifiers.gptq import GPTQModifier
 from llmcompressor.modifiers.transform.smoothquant import SmoothQuantModifier
 from llmcompressor.modifiers.transform.smoothquant.utils import (
     DEFAULT_SMOOTHQUANT_MAPPINGS,
@@ -92,8 +92,8 @@ def test_oneshot_accepts_multiple_recipe_formats(setup_model_and_config, recipe)
     )
 
     output_path = Path(setup_model_and_config["output_dir"])
-    assert output_path.exists() and any(
-        output_path.iterdir()
-    ), f"No output artifacts found in: {output_path}"
+    assert output_path.exists() and any(output_path.iterdir()), (
+        f"No output artifacts found in: {output_path}"
+    )
 
     reset_session()
