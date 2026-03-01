@@ -48,6 +48,7 @@ class ModifierFactory:
         deprecated_packages = [
             "llmcompressor.modifiers.obcq",
             "llmcompressor.modifiers.obcq.sgpt_base",
+            "llmcompressor.modifiers.quantization.gptq",
         ]
         for _importer, modname, _is_pkg in pkgutil.walk_packages(
             main_package.__path__, package_path + "."

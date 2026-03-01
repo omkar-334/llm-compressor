@@ -22,12 +22,12 @@ from torch import distributed as dist
 
 from llmcompressor.core import Event, EventType, State
 from llmcompressor.modifiers import Modifier
-from llmcompressor.modifiers.quantization.calibration import update_weight_global_scale
-from llmcompressor.modifiers.quantization.gptq.gptq_quantize import (
+from llmcompressor.modifiers.gptq.gptq_quantize import (
     accumulate_hessian,
     make_empty_hessian,
     quantize_weight,
 )
+from llmcompressor.modifiers.quantization.calibration import update_weight_global_scale
 from llmcompressor.modifiers.quantization.quantization import QuantizationMixin
 from llmcompressor.modifiers.utils import update_fused_layer_weight_global_scales
 from llmcompressor.sentinel import Sentinel
@@ -272,12 +272,12 @@ class GPTQModifier(Modifier, QuantizationMixin):
         """
         Quantize modules which have been calibrated
         """
-        ### Not Distributed
+        # Not Distributed
         if not is_distributed():
             self.compress_module_list(list(self._num_samples.keys()))
             return
 
-        ### Distributed
+        # Distributed
         rank = dist.get_rank()
         world_size = dist.get_world_size()
 
